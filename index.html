@@ -1,264 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guajiroteca - La Guajira, Colombia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #D2B48C 0%, #87CEEB 25%, #8FBC8F 50%, #A0522D 75%, #F5DEB3 100%); /* Gradiente desértico: arena clara, cielo azul, verde seco, marrón tierra, crema */
-            color: #5D4E37; /* Marrón medio para texto */
-            line-height: 1.6;
-            overflow-x: hidden;
-            animation: backgroundShift 15s ease-in-out infinite alternate;
-        }
-        @keyframes backgroundShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(210, 180, 140, 0.95); /* Arena clara semi-transparente */
-            z-index: 1000;
-            padding: 10px 15px; /* Padding reducido */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            height: 60px; /* Altura reducida */
-        }
-        header:hover {
-            background: rgba(210, 180, 140, 1);
-        }
-        h1 {
-            margin: 0;
-            color: #5D4E37;
-            font-size: 1.5em; /* Tamaño reducido */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            flex: 1;
-        }
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            transition: transform .3 ease;
-            z-index: 1001;
-        }
-        .hamburger:hover {
-            transform: scale(1.1);
-        }
-        .hamburger div {
-            width: 25px; /* Tamaño reducido */
-            height: 3px;
-            background-color: #5D4E37;
-            margin: 3px 0;
-            transition: all 0.3s ease;
-        }
-        .hamburger.open div:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
-        .hamburger.open div:nth-child(2) { opacity: 0; }
-        .hamburger.open div:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
-        .menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: rgba(245, 222, 179, 0.95); /* Crema */
-            flex-direction: column;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: all 0.5s ease;
-        }
-        .menu.show {
-            display: flex;
-        }
-        .menu a {
-            padding: 15px; /* Padding reducido */
-            text-decoration: none;
-            color: #8FBC8F; /* Verde seco */
-            font-weight: 500; /* Peso reducido */
-            border-bottom: 1px solid #D2B48C; /* Arena clara */
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .menu a:hover {
-            background-color: #D2B48C;
-            color: #5D4E37;
-            transform: translateX(5px); /* Movimiento reducido */
-        }
-        .parallax-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s ease;
-        }
-        .parallax-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            transform: translateZ(0);
-            will-change: transform;
-            transition: transform 0.5s ease;
-        }
-        .parallax-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px; /* Ancho reducido */
-            padding: 20px; /* Padding reducido */
-            background: rgba(245, 222, 179, 0.95);
-            border-radius: 10px; /* Radio reducido */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: all 0.5s ease;
-            animation: fadeInUp 1s ease-out;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); } /* Movimiento reducido */
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .parallax-content:hover {
-            transform: scale(1.01); /* Escala reducida */
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-        }
-        h2 {
-            color: #8FBC8F;
-            text-align: center;
-            font-size: 2em; /* Tamaño reducido */
-            margin-bottom: 15px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        img {
-            width: 100%;
-            max-width: 400px; /* Tamaño reducido */
-            height: auto;
-            border-radius: 10px;
-            margin: 15px auto;
-            display: block;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        img:hover {
-            transform: scale(1.02); /* Escala reducida */
-        }
-        p {
-            font-size: 0.95em; /* Tamaño reducido */
-            margin-bottom: 12px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px; /* Padding reducido */
-            background: rgba(210, 180, 140, 0.95);
-            color: #5D4E37;
-            font-weight: 500;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-        }
-        @media (min-width: 768px) {
-            .hamburger {
-                display: none;
-            }
-            .menu {
-                display: flex !important;
-                position: static;
-                width: auto;
-                background: none;
-                flex-direction: row;
-                box-shadow: none;
-            }
-            .menu a {
-                border: none;
-                margin: 0 10px;
-                padding: 8px 15px; /* Padding reducido */
-                border-radius: 15px;
-            }
-            .menu a:hover {
-                transform: translateY(-3px); /* Movimiento reducido */
-            }
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+    <title>Guajiroteca</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
 </head>
+
 <body>
-    <header>
-        <h1>Guajiroteca - La Guajira, Colombia</h1>
-        <div class="hamburger" onclick="toggleMenu()" id="hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <nav class="menu" id="menu">
-            <a href="#introduccion" onclick="closeMenu()">Introducción</a>
-            <a href="#historia" onclick="closeMenu()">Historia</a>
-            <a href="#recursos" onclick="closeMenu()">Recursos</a>
-            <a href="#lugares-interes" onclick="closeMenu()">Lugares de Interés</a>
-            <a href="#caracteristicas" onclick="closeMenu()">Características Relevantes</a>
-        </nav>
-    </header>
 
-    <section id="introduccion" class="parallax-section">
-        <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
-        <div class="parallax-content">
+
+<header class="site-header" role="banner">
+  <div class="container-header">
+    <a href="#introduccion-guajira" class="brand" aria-label="Guajiroteca - Ir a introducción">
+      <h1>Guajiroteca</h1>
+      <span class="brand-sub">La Guajira</span>
+    </a>
+
+    <nav class="main-nav" role="navigation" aria-label="Menú principal">
+      <ul class="nav-list">
+        <li><a href="#introduccion-guajira">Introducción Guajira</a></li>
+        <li><a href="#historia-comunidad">Historia y Comunidad</a></li>
+        <li><a href="#sitios-turisticos">Sitios Turísticos y Recursos</a></li>
+      </ul>
+    </nav>
+
+    <button id="hamburger" class="hamburger" aria-label="Abrir menú" aria-controls="mobile-menu" aria-expanded="false">
+      <span class="bar bar-1"></span>
+      <span class="bar bar-2"></span>
+      <span class="bar bar-3"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <ul>
+      <li><a href="#introduccion-guajira">Introducción Guajira</a></li>
+      <li><a href="#historia-comunidad">Historia y Comunidad</a></li>
+      <li><a href="#sitios-turisticos">Sitios Turísticos y Recursos</a></li>
+    </ul>
+  </div>
+</header>
+
+
+<div class="parallax">
+    <!-- Introducción -->
+    <div class="section" id="introduccion-guajira">
+        <div class="background" style="background-image: url('https://images.unsplash.com/photo-1544900646-8bdaea5e01a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+        <div class="content">
+            <div class="header">
+                <h1>Bienvenido a La Guajira</h1>
+                <div class="subtitle">El departamento norteño de Colombia</div>
+            </div>
             <h2>Introducción</h2>
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Desierto y playa de La Guajira">
-            <p>La Guajira es un departamento ubicado en el extremo norte de Colombia, con una extensión de aproximadamente 20.848 km². Limita al norte con el Mar Caribe, al este con Venezuela, al sur con los departamentos de Cesar y Magdalena, y al oeste con el Mar Caribe. Su capital es Riohacha, y cuenta con una población de alrededor de 1.2 millones de habitantes, compuesta principalmente por comunidades indígenas Wayuu, afrocolombianas y mestizas.</p>
-            <p>El clima es árido y semiárido, con temperaturas que oscilan entre 25°C y 35°C, y precipitaciones escasas, lo que crea paisajes desérticos únicos. La Guajira es conocida por su biodiversidad, incluyendo especies endémicas en el desierto y manglares, y por su rica herencia cultural que combina tradiciones indígenas con influencias africanas y europeas.</p>
-            <p>Este departamento es un lugar de contrastes, donde el desierto se encuentra con el mar, ofreciendo playas vírgenes y dunas imponentes. Es un destino ideal para el ecoturismo y la exploración cultural, destacándose por su resiliencia ante desafíos ambientales como la sequía y la desertificación.</p>
+            <p><span class="highlight">La Guajira</span> es el departamento más septentrional de Colombia, ubicado en la península del mismo nombre que se extiende hacia el Caribe. Con una extensión de aproximadamente 20.849 km², limita al norte con el Mar Caribe, al este con Venezuela, al sur con los departamentos de Cesar y Magdalena, y al oeste nuevamente con el Mar Caribe.</p>
+            <p>Esta región se caracteriza por sus contrastes sorprendentes: vastas extensiones desérticas conocidas como "Alta Guajira" y hermosas playas caribeñas. La Guajira alberga la cultura wayuu, uno de los pueblos indígenas más numerosos y orgullosos de Colombia, preservando tradiciones ancestrales que datan de siglos atrás.</p>
+            <p>El departamento es rico en recursos naturales, incluyendo importantes reservas de petróleo, yacimientos de sal, pesca abundante y potencial turístico emergente. Su biodiversidad incluye la Serranía del Perijá con bosques únicos y manglares costeros que sirven de refugio a numerosas especies.</p>
+            <div class="gallery">
+                <img class="gallery-img" src="Assets/Img/Lugares de agrado (Introducción)/Desierto de La Guajira.webp" alt="Desierto de La Guajira">
+                <img class="gallery-img" src="Assets/Img/Lugares de agrado (Introducción)/Playa de La Guajira.webp" alt="Playa de La Guajira">
+                <img class="gallery-img" src="Assets/Img/Lugares de agrado (Introducción)/Puestos de arte wayuu.webp" alt="Puestos de arte wayuu">
+                <img class="gallery-img" src="Assets/Img/Lugares de agrado (Introducción)/Manglares de La Guajira.webp" alt="Manglares de La Guajira">
+                <img class="gallery-img" src="Assets/Img/Lugares de agrado (Introducción)/Fauna de La Guajira.webp" alt="Fauna de La Guajira">
+                <img class="gallery-img" src="Assets/Img/Lugares de agrado (Introducción)/Césped natural de La Guajira.jpg" alt="Césped natural de La Guajira">
+            </div>
         </div>
-    </section>
+    </div>
 
-    <section id="historia" class="parallax-section">
-        <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
-        <div class="parallax-content">
-            <h2>Historia</h2>
-            <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Petroglifos en Cerro de la Teta, La Guajira">
-            <p>La historia de La Guajira se remonta a miles de años atrás, con evidencias de poblaciones indígenas que habitaban la región desde el período precolombino. Los Wayuu, también conocidos como Guajiros, son descendientes de los pueblos arawak y caribes, y han mantenido su cultura y lengua (wayuunaiki) a lo largo de los siglos. Sus tradiciones incluyen la cría de ganado, la pesca y la agricultura en condiciones áridas.</p>
-            <p>Durante la colonización española en el siglo XVI, la región fue explorada por conquistadores como Alonso de Ojeda y Vasco Núñez de Balboa. La Guajira se convirtió en un punto estratégico para el comercio y la navegación en el Caribe. En el siglo XVIII, se establecieron misiones religiosas y se intensificó la explotación de recursos como la sal y el carbón.</p>
-            <p>En la lucha por la independencia de Colombia a principios del siglo XIX, La Guajira fue escenario de batallas importantes, como la de Bahía Honda en 1813, donde fuerzas patriotas enfrentaron a los realistas. Después de la independencia, la región se integró al territorio colombiano, pero mantuvo su autonomía cultural. En el siglo XX, el descubrimiento de yacimientos de carbón impulsó el desarrollo económico, aunque también trajo desafíos ambientales y sociales.</p>
-            <p>Hoy, La Guajira honra su historia a través de festivales como el Carnaval de Riohacha y la preservación de sitios arqueológicos como los petroglifos del Cerro de la Teta, un volcán extinto que data de hace 10.000 años.</p>
+    <!-- Historia y Comunidad -->
+    <div class="section" id="historia-comunidad">
+        <div class="background" style="background-image: url('https://images.unsplash.com/photo-1544900646-8bdaea5e01a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+        <div class="content">
+            <h2>Historia y Comunidad</h2>
+            <p>La historia de La Guajira se remonta a tiempos precolombinos, cuando los ancestros de los actuales wayuu habitaban la región. Los wayuu ("gente" en su idioma) son el pueblo indígena más numeroso de Colombia, con aproximadamente 400.000 individuos distribuidos en Colombia y Venezuela.</p>
+            <p>La llegada de los españoles en el siglo XVI marcó el comienzo de la colonización. Sin embargo, los wayuu resistieron fuertemente, manteniendo su autonomía y cultura intactas en gran medida. Durante la época de la independencia de Colombia, La Guajira fue escenario de importantes batallas y figuras históricas como José Prudencio Padilla contribuyeron al triunfo independentista.</p>
+            <p>La comunidad wayuu se organiza en clanes matrilineales, con una rica tradición oral transmitida a través de cantos y narrativas ancestrales. Sus artesanías, especialmente las mochilas tejidas llamadas "ranas", son reconocidas mundialmente por su calidad y diseño único. La cosmovisión wayuu integra elementos espirituales profundamente conectados con la naturaleza, donde cada elemento del desierto y el mar tiene un significado sagrado.</p>
+            <p>Actualmente, La Guajira enfrenta desafíos como la pobreza, la sequía recurrente y los conflictos socioambientales derivados de la explotación de recursos naturales. Sin embargo, la resiliencia de su gente y la preservación de sus tradiciones culturales representan esperanza para el futuro del departamento.</p>
+            <div class="gallery">
+                <img class="gallery-img" src="Assets/Img/Historia y Comunidad/Artesanías Wayú.jpeg" alt="Artesanías wayuu">
+                <img class="gallery-img" src="Assets/Img/Historia y Comunidad/Historias Ancestrales.jpg" alt="Historias ancestrales">
+                <img class="gallery-img" src="Assets/Img/Historia y Comunidad/Celebraciones wayuu.webp" alt="Celebraciones wayuu">
+                <img class="gallery-img" src="Assets/Img/Historia y Comunidad/Viviendas tradicionales.webp" alt="Viviendas tradicionales">
+                <img class="gallery-img" src="Assets/Img/Historia y Comunidad/Rituales Ancestrales.jpg" alt="Rituales Ancestrales">
+                <img class="gallery-img" src="Assets/Img/Historia y Comunidad/Herencia cultural.jpg" alt="Herencia cultural">
+            </div>
         </div>
-    </section>
+    </div>
 
-    <section id="recursos" class="parallax-section">
-        <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
-        <div class="parallax-content">
-            <h2>Recursos</h2>
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Mina de carbón en La Guajira">
-            <p>La Guajira es rica en recursos naturales que sustentan su economía. Uno de los más importantes es el carbón, con minas en la zona de El Cerrejón, una de las más grandes del mundo a cielo abierto, que produce millones de toneladas al año y genera ingresos significativos para el país. La sal es otro recurso clave, extraída de salinas costeras y utilizada tanto localmente como para exportación.</p>
-            <p>La pesca y la acuicultura son vitales, con especies como el camarón y el pescado siendo capturados en el Mar Caribe. La agricultura, aunque limitada por el clima árido, incluye cultivos de maíz, yuca y frutas tropicales en áreas irrigadas. Además, el departamento está explorando energías renovables, como la eólica y solar, aprovechando sus vientos constantes y sol abundante.</p>
-            <p>El turismo es un recurso emergente, con atractivos naturales como playas y parques nacionales que atraen visitantes. Sin embargo, la explotación sostenible es un desafío, ya que la sobreexplotación ha causado problemas ambientales como la erosión costera y la contaminación. Organizaciones locales y gubernamentales trabajan en proyectos de conservación para equilibrar el desarrollo económico con la protección del medio ambiente.</p>
+    <!-- Sitios Turísticos y Recursos -->
+    <div class="section" id="sitios-turisticos">
+        <div class="background" style="background-image: url('https://images.unsplash.com/photo-1544900646-8bdaea5e01a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');"></div>
+        <div class="content">
+            <h2>Sitios Turísticos y Recursos</h2>
+            <p>La Guajira ofrece una variedad de destinos turísticos únicos que atraen tanto a aventureros como a amantes de la naturaleza. <span class="highlight">Punta Gallinas</span>, ubicado a 4°32' N, es el punto más septentrional de Colombia y todo el continente suramericano, ofreciendo vistas panorámicas del desierto y el océano.</p>
+            <p><span class="highlight">Cabo de la Vela</span> se erige como uno de los lugares más icónicos, con sus enormes dunas de arena que alcanzan alturas de hasta 60 metros. Este sitio es particularmente especial durante la temporada de vientos, cuando las dunas parecen "cantar" al moverse.</p>
+            <p>La <span class="highlight">Laguna de Serrezuela</span> es un santuario natural declarado Reserva Natural por la UNESCO, hogar de miles de aves migratorias como flamencos durante ciertas épocas del año. Su aguas hipersalinas y paisajes surrealistas crean un ambiente único en el mundo.</p>
+            <p>Otros destinos incluyen las playas de Mayapo, el desierto de la Alta Guajira, y los farallones de Punta Gallinas. La Meseta de Gayón ofrece un ecosistema único con plantas y animales adaptados a las condiciones extremas del desierto.</p>
+            <p>En términos de recursos, La Guajira es rica en petróleo (conocida como "la joya energética de Colombia"), sal marina, pesca comercial, y potencial geotérmico. Su ubicación estratégica y biodiversidad representan importantes activos económicos para el desarrollo sostenible del departamento.</p>
+            <div class="gallery">
+                <img class="gallery-img" src="Assets/Img/Sitios Turísticos y Recursos/Punta Gallinas.jpg" alt="Punta Gallinas">
+                <img class="gallery-img" src="Assets/Img/Sitios Turísticos y Recursos/Cabo de la Vela.jpg" alt="Cabo de la Vela">
+                <img class="gallery-img" src="Assets/Img/Sitios Turísticos y Recursos/Laguna de Serrezuela.jpg" alt="Laguna de Serrezuela">
+                <img class="gallery-img" src="Assets/Img/Sitios Turísticos y Recursos/Mayapo Beach.jpg" alt="Mayapo Beach">
+                <img class="gallery-img" src="Assets/Img/Sitios Turísticos y Recursos/Meseta de Gayón.jpeg" alt="Meseta de Gayón">
+                <img class="gallery-img" src="Assets/Img/Sitios Turísticos y Recursos/Recursos naturales.jpg" alt="Recursos naturales">
+            </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <section id="lugares-interes" class="parallax-section">
-        <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
-        <div class="parallax-content">
-            <h2>Lugares de Interés</h2>
-            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Cabo de la Vela, La Guajira">
-            <p>La Guajira ofrece una variedad de destinos fascinantes para visitantes. Cabo de la Vela, en la península de La Guajira, es famoso por sus dunas de arena blanca y playas cristalinas, donde se puede practicar sandboarding y observar atardeceres espectaculares. Es un lugar ideal para el turismo de aventura y la conexión con la naturaleza.</p>
-            <p>Punta Gallinas, el punto más septentrional de Sudamérica, es un faro solitario rodeado de manglares y desierto, accesible por caminos escénicos. Aquí, los visitantes pueden experimentar la sensación de estar en el "fin del mundo" y disfrutar de baños en aguas turquesas.</p>
-            <p>Riohacha, la capital, combina historia colonial con vida moderna. Su malecón, el Museo del Carnaval y el Parque Nacional Natural Macuira, con su biodiversidad desértica, son imperdibles. Otros sitios incluyen el Santuario de Fauna y Flora Los Flamencos, hogar de aves migratorias, y las rancherías Wayuu, donde se puede aprender sobre su cultura tradicional.</p>
-            <p>Estos lugares no solo ofrecen belleza natural, sino también oportunidades para el ecoturismo responsable, promoviendo la conservación y el respeto por las comunidades locales.</p>
-        </div>
-    </section>
-
-    <section id="caracteristicas" class="parallax-section">
-        <div class="parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');"></div>
-        <div class="parallax-content">
-            <h2>Características Relevantes</h2>
-            <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Mujer Wayuu tejiendo, La Guajira">
-            <p>La Guajira se distingue por su rica diversidad cultural. Los Wayuu, con su lengua propia y tradiciones como el tejido de mochilas y la celebración de la "yonna" (fiesta de la pubertad), representan una cultura vibrante y resistente. El vallenato, género musical originario de la región, con artistas como Diomedes Díaz, es un símbolo nacional de alegría y folclor.</p>
-            <p>Las comunidades afrocolombianas aportan ritmos como el currulao y tradiciones culinarias únicas. La biodiversidad es notable, con especies como el cactus cardón, el flamenco rosado y manglares que albergan vida marina diversa. Sin embargo, enfrenta desafíos como la sequía crónica, la pobreza y la migración, impulsando iniciativas de desarrollo sostenible.</p>
-            <p>La resiliencia de sus habitantes, su conexión espiritual con la tierra y
+</body>
+</html>
